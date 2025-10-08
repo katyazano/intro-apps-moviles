@@ -135,101 +135,6 @@ struct cliente{
     var nip: Int? 
 }
 
-// Creamos una instancia de la estructura para almacenar los datos
-var cliente1 = cliente()
-
-// 1. Apellido Paterno (String)
-print("Ingresa el apellido paterno:")
-cliente1.apP = readLine()
-
-// 2. Apellido Materno (String)
-print("Ingresa el apellido materno:")
-cliente1.apM = readLine()
-
-// 3. Nombre (String)
-print("Ingresa el nombre:")
-cliente1.nombre = readLine()
-
-// 4. Número de Cuenta (Int)
-print("Ingresa el número de cuenta:")
-if let entradaNumCuenta = readLine(), let numero = Int(entradaNumCuenta) {
-    cliente1.numCuenta = numero
-} else {
-    print("Entrada inválida. Se guardará como nulo.")
-}
-
-// 5. Tipo de Cliente (Int)
-print("""
-Selecciona el tipo de cliente:
-  1. Usuario
-  2. Intermedio
-  3. VIP
-""")
-if let entradaTipo = readLine(), let tipo = Int(entradaTipo) {
-    cliente1.tipoCliente = tipo
-} else {
-    print("Entrada inválida. Se guardará como nulo.")
-}
-
-// 6. Fecha de Nacimiento (String)
-print("Ingresa la fecha de nacimiento (dd/mm/aaaa):")
-cliente1.fechaNac = readLine()
-
-// 7. RFC (String) se crea a partir de los otros datos
-
-// 8. Saldo (Double)
-print("Ingresa el saldo actual:")
-if let entradaSaldo = readLine(), let saldoDouble = Double(entradaSaldo) {
-    cliente1.saldo = saldoDouble
-} else {
-    print("Entrada inválida. Se guardará como nulo.")
-}
-
-// 9. Año de Vencimiento (Int)
-print("Ingresa el año de vencimiento de la tarjeta:")
-if let entradaAño = readLine(), let año = Int(entradaAño) {
-    cliente1.añoVenc = año
-} else {
-    print("Entrada inválida. Se guardará como nulo.")
-}
-
-// 10. NIP (Int)
-print("Ingresa el NIP:")
-if let entradaNIP = readLine(), let nipInt = Int(entradaNIP) {
-    cliente1.nip = nipInt
-} else {
-    print("Entrada inválida. Se guardará como nulo.")
-}
-
-
-// --- Impresión de los datos recolectados ---
-print("\n Datos del Cliente Registrado")
-print("Nombre completo: \(cliente1.nombre ?? "N/A") \(cliente1.apP ?? "") \(cliente1.apM ?? "")")
-print("Número de cuenta: \(cliente1.numCuenta ?? 0)")
-switch cliente1.tipoCliente{
-    case 1:
-        print("Tipo de cliente: Usuario")
-    case 2:
-        print("Tipo de cliente: Intermedio")
-    case 3:
-        print("Tipo de cliente: VIP")
-    default:
-        print("No especificado")
-}
-print("Tipo de cliente: \(cliente1.tipoCliente ?? 0)")
-print("Fecha de nacimiento: \(cliente1.fechaNac ?? "N/A")")
-print("Saldo: $\(cliente1.saldo ?? 0.0)")
-print("Año de vencimiento: \(cliente1.añoVenc ?? 0)")
-print("NIP: **** \(cliente1.nip ?? 0)") // Por seguridad, no mostramos el NIP
-
-
-
-
-/*
-struct cliente{
-    var nombre: String? = nil
-}
-
 var dbClientes: [cliente] = [] //crea arreglo
 
 print("cuantos clientes quieren agregar: ")
@@ -237,17 +142,79 @@ if let cant = readLine(), let cantInt = Int(cant){
     if cantInt > 0{
         dbClientes = Array(repeating: cliente(), count: cantInt) //inicializa arreglo
         for i in 0...cantInt-1{
+            print("Ingresa el apellido paterno:")
+            dbClientes[i].apP = readLine()
+
+            print("Ingresa el apellido materno:")
+            dbClientes[i].apM = readLine()
+
             print("ingresa tu nombre: ")
             dbClientes[i].nombre = readLine()
 
-            //pedir todos los datos y subir a act 8
+            print("Ingresa el número de cuenta:")
+            if let entradaNumCuenta = readLine(), let numero = Int(entradaNumCuenta) {
+                dbClientes[i].numCuenta = numero
+            } else {
+                print("Entrada inválida. Se guardará como nulo.")
+            }
+
+            print("""
+            Selecciona el tipo de cliente:
+            1. Usuario
+            2. Intermedio
+            3. VIP
+            """)
+            if let entradaTipo = readLine(), let tipo = Int(entradaTipo) {
+                dbClientes[i].tipoCliente = tipo
+            } else {
+                print("Entrada inválida. Se guardará como nulo.")
+            }
+
+            print("Ingresa la fecha de nacimiento (dd/mm/aaaa):")
+            dbClientes[i].fechaNac = readLine()
+
+            print("Ingresa el saldo actual:")
+            if let entradaSaldo = readLine(), let saldoDouble = Double(entradaSaldo) {
+                dbClientes[i].saldo = saldoDouble
+            } else {
+                print("Entrada inválida. Se guardará como nulo.")
+            }
+
+            print("Ingresa el año de vencimiento de la tarjeta:")
+            if let entradaAño = readLine(), let año = Int(entradaAño) {
+                dbClientes[i].añoVenc = año
+            } else {
+                print("Entrada inválida. Se guardará como nulo.")
+            }
+
+            print("Ingresa el NIP:")
+            if let entradaNIP = readLine(), let nipInt = Int(entradaNIP) {
+                dbClientes[i].nip = nipInt
+            } else {
+                print("Entrada inválida. Se guardará como nulo.")
+            }
+
             print("registro exitoso, num de cliente: ", i)
         }
         print("ingresa el # de cliente: ")
         if let cant = readLine(), let optBuscar = Int(cant){
             if optBuscar >= 0 && optBuscar < cantInt{
-                print("nombre: \(dbClientes[optBuscar].nombre ?? "no hay registro")") 
-                //imprime todos los datos
+                print("nombre completo: \(dbClientes[optBuscar].nombre ?? "no hay registro") \(dbClientes[optBuscar].apP ?? "") \(dbClientes[optBuscar].apM ?? "")")
+                print("numero de cuenta: \(dbClientes[optBuscar].numCuenta ?? 0)") 
+                switch dbClientes[optBuscar].tipoCliente{
+                    case 1:
+                        print("Tipo de cliente: Usuario")
+                    case 2:
+                        print("Tipo de cliente: Intermedio")
+                    case 3:
+                        print("Tipo de cliente: VIP")
+                    default:
+                        print("No especificado")
+                print("fecha de nacimiento: \(dbClientes[optBuscar].fechaNac ?? "n/a")")
+                print("saldo: $\(dbClientes[optBuscar].saldo ?? 0.0)")
+                print("año de vencimiento: \(dbClientes[optBuscar].añoVenc ?? 0)")
+                print("NIP: \(dbClientes[optBuscar].nip ?? 0)") 
+                }
             } else{
                 print("id inexistente")
             }
@@ -263,4 +230,3 @@ if let cant = readLine(), let cantInt = Int(cant){
     print("incorrecto intente de nuevo")   
 }
 
-*/
