@@ -211,7 +211,10 @@ if let cant = readLine(), let cantInt = Int(cant){
                     default:
                         print("No especificado")
                 }
-                
+                print("fecha de nacimiento: \(dbClientes[optBuscar].fechaNac ?? "n/a")")
+                print("saldo: $\(dbClientes[optBuscar].saldo ?? 0.0)")
+                print("año de vencimiento: \(dbClientes[optBuscar].añoVenc ?? 0)")
+                print("NIP: \(dbClientes[optBuscar].nip ?? 0)")
             } else{
                 print("id inexistente")
             }
