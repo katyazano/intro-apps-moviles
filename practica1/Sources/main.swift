@@ -123,6 +123,7 @@ print ("tu nombre es: \(name!)")
 
 
 struct cliente{
+    var idUser: Int?
     var apP: String? 
     var apM: String? 
     var nombre: String? 
@@ -137,6 +138,23 @@ struct cliente{
 
 var dbClientes: [cliente] = [] //crea arreglo
 
+func generarNumCuenta() -> String {
+    let numeros: "1234567890"
+
+}
+
+func generarHomoclave() -> String {
+    let caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    var homoclave = ""
+    for _ in 0..<3 {
+        if let random = caracteres.randomElement() {
+            homoclave.append(random)
+        }
+    }
+    return homoclave
+}
+
+
 print("cuantos clientes quieren agregar: ")
 if let cant = readLine(), let cantInt = Int(cant){
     if cantInt > 0{
@@ -144,24 +162,27 @@ if let cant = readLine(), let cantInt = Int(cant){
         for i in 0...cantInt-1{
             print("Ingresa el apellido paterno:")
             dbClientes[i].apP = readLine()
+            let paterno = Array(dbClientes[i].apP ?? "")
 
             print("Ingresa el apellido materno:")
             dbClientes[i].apM = readLine()
+            let materno = Array(dbClientes[i].apM ?? "")
 
             print("ingresa tu nombre: ")
             dbClientes[i].nombre = readLine()
+            let name = Array(dbClientes[i].nombre ?? "")
 
-            print("Ingresa el número de cuenta:")
-            if let entradaNumCuenta = readLine(), let numero = Int(entradaNumCuenta) {
-                dbClientes[i].numCuenta = numero
-            } else {
-                print("Entrada inválida. Se guardará como nulo.")
-            }
+            // print("Ingresa el número de cuenta:")
+            // if let entradaNumCuenta = readLine(), let numero = Int(entradaNumCuenta) {
+            //     dbClientes[i].numCuenta = numero
+            // } else {
+            //     print("Entrada inválida. Se guardará como nulo.")
+            // }
 
             print("""
             Selecciona el tipo de cliente:
-            1. Usuario
-            2. Intermedio
+            1. Cliente
+            2. Clásico
             3. VIP
             """)
             if let entradaTipo = readLine(), let tipo = Int(entradaTipo) {
@@ -172,6 +193,12 @@ if let cant = readLine(), let cantInt = Int(cant){
 
             print("Ingresa la fecha de nacimiento (dd/mm/aaaa):")
             dbClientes[i].fechaNac = readLine()
+            let fecha = Array(dbClientes[i].fechaNac ?? "")
+
+            // creamos RFC a partir de los datos dados
+            let v1 = (fecha.count >= 6 ? String(fecha[8]) + String(fecha[9]) + String(fecha[3]) + String(fecha[4]) + String(fecha[0]) + String(fecha[1]):"XXXXXX")
+            dbClientes[i].rfc=(paterno.count > 1 ? String(paterno[0]) + String(paterno[1]) :"XX") + (materno.count > 0 ? String(materno[0]):"X") + (name.count > 0 ? String(name[0]):"X") + v1 + generarHomoclave()
+            
 
             print("Ingresa el saldo actual:")
             if let entradaSaldo = readLine(), let saldoDouble = Double(entradaSaldo) {
@@ -180,12 +207,12 @@ if let cant = readLine(), let cantInt = Int(cant){
                 print("Entrada inválida. Se guardará como nulo.")
             }
 
-            print("Ingresa el año de vencimiento de la tarjeta:")
-            if let entradaAño = readLine(), let año = Int(entradaAño) {
-                dbClientes[i].añoVenc = año
-            } else {
-                print("Entrada inválida. Se guardará como nulo.")
-            }
+            // print("Ingresa el año de vencimiento de la tarjeta:")
+            // if let entradaAño = readLine(), let año = Int(entradaAño) {
+            //     dbClientes[i].añoVenc = año
+            // } else {
+            //     print("Entrada inválida. Se guardará como nulo.")
+            // }
 
             print("Ingresa el NIP:")
             if let entradaNIP = readLine(), let nipInt = Int(entradaNIP) {
@@ -195,6 +222,8 @@ if let cant = readLine(), let cantInt = Int(cant){
             }
 
             print("registro exitoso, num de cliente: ", i)
+            // revisa
+            // dbClientes[i].idUser = [i]
         }
         print("ingresa el # de cliente: ")
         if let cant = readLine(), let optBuscar = Int(cant){
@@ -203,18 +232,19 @@ if let cant = readLine(), let cantInt = Int(cant){
                 print("numero de cuenta: \(dbClientes[optBuscar].numCuenta ?? 0)") 
                 switch dbClientes[optBuscar].tipoCliente{
                     case 1:
-                        print("Tipo de cliente: Usuario")
+                        print("Tipo de cliente: Cliente")
                     case 2:
-                        print("Tipo de cliente: Intermedio")
+                        print("Tipo de cliente: Clasico")
                     case 3:
                         print("Tipo de cliente: VIP")
                     default:
                         print("No especificado")
                 }
                 print("fecha de nacimiento: \(dbClientes[optBuscar].fechaNac ?? "n/a")")
+                print("rfc:  \(dbClientes[optBuscar].rfc ?? "n/a")")
                 print("saldo: $\(dbClientes[optBuscar].saldo ?? 0.0)")
                 print("año de vencimiento: \(dbClientes[optBuscar].añoVenc ?? 0)")
-                print("NIP: \(dbClientes[optBuscar].nip ?? 0)")
+                print("NIP: ****")                
             } else{
                 print("id inexistente")
             }

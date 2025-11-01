@@ -6,8 +6,9 @@
             "args": [],
             "cwd": "${workspaceFolder:swift}/practica1",
             "name": "Debug MyCLI (practica1)",
-            "program": "${workspaceFolder:swift}/practica1/.build/debug/MyCLI",
-            "preLaunchTask": "swift: Build Debug MyCLI (practica1)"
+            "preLaunchTask": "swift: Build Debug MyCLI (practica1)",
+            "target": "MyCLI",
+            "configuration": "debug"
         },
         {
             "type": "swift",
@@ -15,8 +16,9 @@
             "args": [],
             "cwd": "${workspaceFolder:swift}/practica1",
             "name": "Release MyCLI (practica1)",
-            "program": "${workspaceFolder:swift}/practica1/.build/release/MyCLI",
-            "preLaunchTask": "swift: Build Release MyCLI (practica1)"
+            "preLaunchTask": "swift: Build Release MyCLI (practica1)",
+            "target": "MyCLI",
+            "configuration": "release"
         }
     ]
 }
