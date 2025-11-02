@@ -2,9 +2,30 @@
     "configurations": [
         {
             "type": "swift",
+            "request": "attach",
+            "name": "Attach to Swift Executable",
+            "program": "${workspaceRoot}/.build/debug/<program>"
+        },
+        {
+            "type": "swift",
+            "request": "attach",
+            "name": "Attach to Swift Executable",
+            "pid": "${command:pickProcess}"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "name": "Launch Swift Executable",
+            "program": "${workspaceRoot}/.build/debug/<program>",
+            "args": [],
+            "env": {},
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "swift",
             "request": "launch",
             "args": [],
-            "cwd": "${workspaceFolder:swift}/practica1",
+            "cwd": "${workspaceFolder:intro-apps-moviles}/practica1",
             "name": "Debug MyCLI (practica1)",
             "preLaunchTask": "swift: Build Debug MyCLI (practica1)",
             "target": "MyCLI",
@@ -14,11 +35,51 @@
             "type": "swift",
             "request": "launch",
             "args": [],
-            "cwd": "${workspaceFolder:swift}/practica1",
+            "cwd": "${workspaceFolder:intro-apps-moviles}/practica1",
             "name": "Release MyCLI (practica1)",
             "preLaunchTask": "swift: Build Release MyCLI (practica1)",
             "target": "MyCLI",
             "configuration": "release"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:intro-apps-moviles}/banco",
+            "name": "Debug banco (banco)",
+            "target": "banco",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug banco (banco)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:intro-apps-moviles}/banco",
+            "name": "Release banco (banco)",
+            "target": "banco",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release banco (banco)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:intro-apps-moviles}/bancoo",
+            "name": "Debug bancoo (bancoo)",
+            "target": "bancoo",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug bancoo (bancoo)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:intro-apps-moviles}/bancoo",
+            "name": "Release bancoo (bancoo)",
+            "target": "bancoo",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release bancoo (bancoo)"
         }
     ]
 }

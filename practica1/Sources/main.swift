@@ -1,6 +1,5 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
-
 /*
 var saludo: String = "Saludos Swift"
 print("\nHello, world!")
@@ -88,175 +87,150 @@ print("ingresa tu nombre: ")
 var name = readLine()
 print ("tu nombre es: \(name!)")
 
-*/
 
-// arreglos
-// let juguetes = ["pelota", "osito", "carrito", "muñeca", "cocinita"]
-// var i = 0
-// var op = 0
+//arreglos
+let juguetes = ["pelota", "osito", "carrito", "muñeca", "cocinita"]
+var i = 0
+var op = 0
 
-// for i in juguetes{
-//     print(juguetes)
-// }
+for i in juguetes{
+    print(juguetes)
+}
 
 
-// for i in 0..<3{
-//     print(juguetes)   
-// }
+for i in 0..<3{
+    print(juguetes)   
+}
 
-// while i<3 {
-//     print(juguetes[i])
-//     i+=1
-// }
+while i<3 {
+    print(juguetes[i])
+    i+=1
+}
 
-// repeat{
-//     print("di el numero de indice que quieres imprimir del 0 al 4")
+repeat{
+    print("di el numero de indice que quieres imprimir del 0 al 4")
     
-//     if let opcion = readLine() , let eleccion = Int(opcion){
-//         op=eleccion
-//         print(juguetes[op])
-//     }else {
-//         print("intenta de nuevo")
-//         op = 0
-//     }
-// }while op < 5 && op > -1
-
-
-struct cliente{
-    var idUser: Int?
-    var apP: String? 
-    var apM: String? 
-    var nombre: String? 
-    var numCuenta: Int? 
-    var tipoCliente: Int?
-    var fechaNac: String?
-    var rfc: String? 
-    var saldo: Double?
-    var añoVenc: Int?
-    var nip: Int? 
-}
-
-var dbClientes: [cliente] = [] //crea arreglo
-
-func generarNumCuenta() -> String {
-    let numeros: "1234567890"
-
-}
-
-func generarHomoclave() -> String {
-    let caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    var homoclave = ""
-    for _ in 0..<3 {
-        if let random = caracteres.randomElement() {
-            homoclave.append(random)
-        }
+    if let opcion = readLine() , let eleccion = Int(opcion){
+        op=eleccion
+        print(juguetes[op])
+    }else {
+        print("intenta de nuevo")
+        op = 0
     }
-    return homoclave
-}
+}while op < 5 && op > -1
 
 
-print("cuantos clientes quieren agregar: ")
-if let cant = readLine(), let cantInt = Int(cant){
-    if cantInt > 0{
-        dbClientes = Array(repeating: cliente(), count: cantInt) //inicializa arreglo
-        for i in 0...cantInt-1{
-            print("Ingresa el apellido paterno:")
-            dbClientes[i].apP = readLine()
-            let paterno = Array(dbClientes[i].apP ?? "")
 
-            print("Ingresa el apellido materno:")
-            dbClientes[i].apM = readLine()
-            let materno = Array(dbClientes[i].apM ?? "")
+var op = 0
 
-            print("ingresa tu nombre: ")
-            dbClientes[i].nombre = readLine()
-            let name = Array(dbClientes[i].nombre ?? "")
-
-            // print("Ingresa el número de cuenta:")
-            // if let entradaNumCuenta = readLine(), let numero = Int(entradaNumCuenta) {
-            //     dbClientes[i].numCuenta = numero
-            // } else {
-            //     print("Entrada inválida. Se guardará como nulo.")
-            // }
-
-            print("""
-            Selecciona el tipo de cliente:
-            1. Cliente
-            2. Clásico
-            3. VIP
-            """)
-            if let entradaTipo = readLine(), let tipo = Int(entradaTipo) {
-                dbClientes[i].tipoCliente = tipo
-            } else {
-                print("Entrada inválida. Se guardará como nulo.")
-            }
-
-            print("Ingresa la fecha de nacimiento (dd/mm/aaaa):")
-            dbClientes[i].fechaNac = readLine()
-            let fecha = Array(dbClientes[i].fechaNac ?? "")
-
-            // creamos RFC a partir de los datos dados
-            let v1 = (fecha.count >= 6 ? String(fecha[8]) + String(fecha[9]) + String(fecha[3]) + String(fecha[4]) + String(fecha[0]) + String(fecha[1]):"XXXXXX")
-            dbClientes[i].rfc=(paterno.count > 1 ? String(paterno[0]) + String(paterno[1]) :"XX") + (materno.count > 0 ? String(materno[0]):"X") + (name.count > 0 ? String(name[0]):"X") + v1 + generarHomoclave()
+repeat {
+    print("""
+    Bienvenido al sistema de Banco
+    Selecciona una opción:
+    1. Ejecutivo
+    2. Usuario
+    3. Salir
+    """)
+    
+    if let entrada = readLine(), let opcion = Int(entrada) {
+        op = opcion
+        switch opcion {
+        case 1:
+            print("Modo Ejecutivo")
+            // loginEjecutivo()
             
-
-            print("Ingresa el saldo actual:")
-            if let entradaSaldo = readLine(), let saldoDouble = Double(entradaSaldo) {
-                dbClientes[i].saldo = saldoDouble
-            } else {
-                print("Entrada inválida. Se guardará como nulo.")
-            }
-
-            // print("Ingresa el año de vencimiento de la tarjeta:")
-            // if let entradaAño = readLine(), let año = Int(entradaAño) {
-            //     dbClientes[i].añoVenc = año
-            // } else {
-            //     print("Entrada inválida. Se guardará como nulo.")
-            // }
-
-            print("Ingresa el NIP:")
-            if let entradaNIP = readLine(), let nipInt = Int(entradaNIP) {
-                dbClientes[i].nip = nipInt
-            } else {
-                print("Entrada inválida. Se guardará como nulo.")
-            }
-
-            print("registro exitoso, num de cliente: ", i)
-            // revisa
-            // dbClientes[i].idUser = [i]
-        }
-        print("ingresa el # de cliente: ")
-        if let cant = readLine(), let optBuscar = Int(cant){
-            if optBuscar >= 0 && optBuscar < cantInt{
-                print("nombre completo: \(dbClientes[optBuscar].nombre ?? "no hay registro") \(dbClientes[optBuscar].apP ?? "") \(dbClientes[optBuscar].apM ?? "")")
-                print("numero de cuenta: \(dbClientes[optBuscar].numCuenta ?? 0)") 
-                switch dbClientes[optBuscar].tipoCliente{
+        case 2:
+            print("Modo Usuario")
+            var opUsuario = 0
+            
+            repeat {
+                print("""
+                Selecciona una opción:
+                1. Cliente
+                2. Cuenta habiente
+                3. Salir
+                """)
+                
+                if let entradaUser = readLine(), let opcionUser = Int(entradaUser) {
+                    opUsuario = opcionUser
+                    switch opcionUser {
                     case 1:
-                        print("Tipo de cliente: Cliente")
+                        var opCliente = 0
+                        repeat {
+                            print("""
+                            Menú Cliente:
+                            1. Depositar
+                            2. Pagar servicios
+                            3. Salir
+                            """)
+                            if let entradaCliente = readLine(), let opcionCliente = Int(entradaCliente) {
+                                opCliente = opcionCliente
+                                switch opcionCliente {
+                                case 1:
+                                    print("Ingresa la cantidad a depositar: ")
+                                case 2:
+                                    print("Ingresa el servicio a pagar: ")
+                                case 3:
+                                    print("Saliendo del modo cliente...")
+                                default:
+                                    print("Opción inválida. Intente de nuevo.")
+                                }
+                            } else {
+                                print("Entrada inválida. Intente de nuevo.")
+                            }
+                        } while opCliente != 3
+                        
                     case 2:
-                        print("Tipo de cliente: Clasico")
+                        var opCuenta = 0
+                        repeat {
+                            print("""
+                            Menú Cuenta Habiente:
+                            1. Depositar
+                            2. Retirar
+                            3. Consultar saldo
+                            4. Transferir
+                            5. Salir
+                            """)
+                            if let entradaCuenta = readLine(), let opcionCuenta = Int(entradaCuenta) {
+                                opCuenta = opcionCuenta
+                                switch opcionCuenta {
+                                case 1:
+                                    print("Ingresa la cantidad a depositar: ")
+                                case 2:
+                                    print("Ingresa la cantidad a retirar: ")
+                                case 3:
+                                    print("Tu saldo es: $XXXX")
+                                case 4:
+                                    print("Ingresa la cuenta a transferir: ")
+                                case 5:
+                                    print("Saliendo del modo cuenta habiente...")
+                                default:
+                                    print("Opción inválida. Intente de nuevo.")
+                                }
+                            } else {
+                                print("Entrada inválida. Intente de nuevo.")
+                            }
+                        } while opCuenta != 5
+                        
                     case 3:
-                        print("Tipo de cliente: VIP")
+                        print("Saliendo del modo usuario...")
                     default:
-                        print("No especificado")
+                        print("Opción inválida. Intente de nuevo.")
+                    }
+                } else {
+                    print("Entrada inválida. Intente de nuevo.")
                 }
-                print("fecha de nacimiento: \(dbClientes[optBuscar].fechaNac ?? "n/a")")
-                print("rfc:  \(dbClientes[optBuscar].rfc ?? "n/a")")
-                print("saldo: $\(dbClientes[optBuscar].saldo ?? 0.0)")
-                print("año de vencimiento: \(dbClientes[optBuscar].añoVenc ?? 0)")
-                print("NIP: ****")                
-            } else{
-                print("id inexistente")
-            }
-        } else{
-            print("no fue un numero")
+            } while opUsuario != 3
             
+        case 3:
+            print("Saliendo del sistema...")
+            
+        default:
+            print("Opción inválida. Intente de nuevo.")
         }
-    }else{
-        print("error, no puede ser menor a 0")
-        
+    } else {
+        print("Entrada inválida. Intente de nuevo.")
     }
-}else{
-    print("incorrecto intente de nuevo")   
-}
+} while op != 3
 
+//*/
